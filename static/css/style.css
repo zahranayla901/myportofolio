@@ -86,7 +86,7 @@ h1, .brand {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-dark);
+    color: var(--accent);
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
@@ -177,6 +177,87 @@ h1, .brand {
     border: 3px solid var(--ink);
 }
 
+/* Experience's Section */
+.experience-section {
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+ 
+.experience-header {
+    display: flex;
+    justify-content: center;
+    padding: 1.1rem 0;
+}
+ 
+.section-badge-alt {
+    background-color: rgba(255, 220, 219, 0.25); /* last num (0.25) stand for oppacity*/
+    border: 3px solid rgba(255, 220, 219, 0.5);
+    color: var(--ink);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.6rem 2rem;
+    border-radius: 999px;
+}
+ 
+.experience-panel {
+    background-color: rgba(255, 220, 219, 0.25);
+    border: 3px solid rgba(255, 220, 219, 0.5);
+    padding: 2.25rem 0;
+}
+ 
+.experience-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5 rem;
+    text-align: center;
+}
+ 
+.experience-item {
+    width: 140px;
+}
+ 
+.experience-item .logo-circle {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 0.9rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color:var(--accent-dark);
+    border: 1.5px solid var(--accent-dark);
+    overflow: hidden;
+}
+ 
+.experience-item .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+ 
+.experience-item h4 {
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+}
+ 
+.experience-item p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.experience-item:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+/* end of experience's section */
+
 .site-footer {
     padding: 1.5rem;
     color: var(--text-muted);
@@ -195,6 +276,7 @@ h1, .brand {
 
     .hero-photo {
         max-width: 220px;
+        margin: 0 auto;
     }
 
     .social-links {
