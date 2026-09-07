@@ -5,9 +5,9 @@ NPM: 2506534163
 Kelas: PBP E
 
 ### Tugas 1
-1. Pada Tutorial dan Tugas 1, Anda diberi kebebasan untuk   menentukan tampilan dari website portofolio Anda. Saat Anda merancang struktur HTML yang digunakan, apakah Anda menggunakan elemen semantik HTML5 seperti <section>, <article>, atau <aside>? Jika iya, bagaimana elemen tersebut membantu Anda dalam membuat static web? Jika tidak, mengapa tanpa elemen tersebut sudah memenuhi kebutuhan desain Anda?
+1. Pada Tutorial dan Tugas 1, Anda diberi kebebasan untuk   menentukan tampilan dari website portofolio Anda. Saat Anda merancang struktur HTML yang digunakan, apakah Anda menggunakan elemen semantik HTML5 seperti section, article, atau aside? Jika iya, bagaimana elemen tersebut membantu Anda dalam membuat static web? Jika tidak, mengapa tanpa elemen tersebut sudah memenuhi kebutuhan desain Anda?
 
-Dalam pengerjaan tugas individu 1 ini, saya menggunakan elemen semantik HTML5 berupa <section>. penggunaan <section> sangat membantu dalam organize my program. batasan <section> memperjelas fungsi bagian program tersebut, misalnya kayak misahin part profile dengan part experiences.
+Dalam pengerjaan tugas individu 1 ini, saya menggunakan elemen semantik HTML5 berupa section. penggunaan section sangat membantu dalam organize my program. batasan section memperjelas fungsi bagian program tersebut, misalnya kayak misahin part profile dengan part experiences.
 
 2. Ketika Anda mengatur CSS Anda agar tetap responsive, tantangan tata letak apa yang Anda temukan? Bagaimana Anda mengevaluasi elemen mana yang harus diubah posisinya atau diprioritaskan ukurannya saat berpindah dari tampilan desktop ke mobile?
 
@@ -19,7 +19,7 @@ Untuk foto avatar sendiri, saya hanya mengubah yang selalu rata kiri menjadi aut
 Karena pertama kali juga membuat web dan memakai html css, saya cukup kesulitan ketika harus mengedit isi webnya secara manual per line. sebelumnya, saya sempat design lewat figma dulu, tapi ternyata realisasi dalam code programnya cukup sulit tidak seperti ekspektasi. lalu ngecek apakah posisi dan hasil yang diinginkan juga harus runserver berulang. belum lagi jika ada kesalahan ukuran yang kurang pas.  
 Untuk pengembangan selanjutnya, saya ingin coba mengadakan fitur message yang dihubungkan dengan django form & database agar bisa tersimpan otomatis di email. Selain itu, fitur message juga mempermudah user reach-out tanpa perlu membuka aplikasi lain seperti social media.
 
-AI Disclosure: Dalam pengerjaan proyek tugas individu 1, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Mempertimbangkan pengalaman pertama menyentuh html dan css, saya meminta ai me-breakdown fungsi dari tiap raw code untuk saya kembangkan kedepannya. Claude memberikan penjelasan interaksi anatar css dengan html, struktur halaman (<header> <main> <footer>), convert font dan ukuran rem px, dan table struktur beserta outputnya. selain itu saya juga memakai AI untuk debugging git dan pws karena ada kendala file git dan lokal yang tidak sinkron terupdate. 
+AI Disclosure: Dalam pengerjaan proyek tugas individu 1, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Mempertimbangkan pengalaman pertama menyentuh html dan css, saya meminta ai me-breakdown fungsi dari tiap raw code untuk saya kembangkan kedepannya. Claude memberikan penjelasan interaksi anatar css dengan html, struktur halaman (header, main, footer), convert font dan ukuran rem px, dan table struktur beserta outputnya. selain itu saya juga memakai AI untuk debugging git dan pws karena ada kendala file git dan lokal yang tidak sinkron terupdate. 
 
 Special thx to:
 - cecilia yang ngajarin input favicon
