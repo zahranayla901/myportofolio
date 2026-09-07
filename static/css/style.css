@@ -5,13 +5,14 @@
 }
 
 :root {
-    --ink: #fdfbd4;
-    --paper: #1c1c31;
-    --accent: #8686ac;
-    --accent-dark: #77a0d0;
-    --line: #d7deff;
-    --text-muted: #aeb8cd;
+    --ink: #FFFFFF;
+    --paper: #B4C8EA;
+    --paperdark: #93A9D1;
+    --accent: #FFDCDB;
+    --accent-dark: #F7CACA;
+    --text-muted: #8194B5;
     --radius: 4px;
+    --highlight: #FFD800;
 }
 
 body {
@@ -22,7 +23,7 @@ body {
 }
 
 h1, .brand {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-family: "Ubuntu Sans Mono", -apple-system, sans-serif;
 }
 
 .container {
@@ -32,7 +33,7 @@ h1, .brand {
 }
 
 .site-header {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--accent-dark);
 }
 
 .site-header .container {
@@ -95,6 +96,12 @@ h1, .brand {
     line-height: 0.95;
 }
 
+/*Highlight color for "AYA" in h1*/
+.highlight {
+    color: var(--highlight);
+    font-weight: 700;
+}
+
 .bio {
     color: var(--text-muted);
     max-width: 480px;
@@ -111,7 +118,7 @@ h1, .brand {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-muted);
+    color: var(--accent);
     margin-bottom: 0.15rem;
 }
 
@@ -130,14 +137,15 @@ h1, .brand {
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    color: var(--paper);
-    background-color: var(--ink);
+    color: var(--ink);
+    background-color: var(--paperdark);
     border-radius: var(--radius);
     padding: 0.5rem 1.1rem;
     transition: background-color 0.2s ease;
 }
 
 .social-link:hover {
+    color: var(--paper);
     background-color: var(--accent);
 }
 
@@ -173,7 +181,7 @@ h1, .brand {
     padding: 1.5rem;
     color: var(--text-muted);
     font-size: 0.85rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--accent-dark);
 }
 
 @media (max-width: 600px) {
