@@ -13,6 +13,9 @@
     --text-muted: #8194B5;
     --radius: 4px;
     --highlight: #FFD800;
+    --accent-on-light: #E8899C; 
+    --status-on-light: #C9A200;  
+    --line: var(--accent-dark);
 }
 
 body {
@@ -376,7 +379,7 @@ h1, .brand {
 }
 
 .section-kicker {
-    color: var(--accent-dark);
+    color: var(--accent);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -402,13 +405,14 @@ h1, .brand {
 }
 
 .experience-category {
-    color: var(--accent-dark);
+    color: var(--paperdark);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .experience-card h2 {
+    color: var(--accent-on-light);
     margin: 0.5rem 0;
     font-size: 1.25rem;
 }
@@ -419,6 +423,7 @@ h1, .brand {
 }
 
 .experience-status {
+    color: var(--status-on-light);
     margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
