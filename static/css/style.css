@@ -6,6 +6,7 @@
 
 :root {
     --ink: #FFFFFF;
+    --ink-dark: #1F2942; 
     --paper: #B4C8EA;
     --paperdark: #93A9D1;
     --accent: #FFDCDB;
@@ -13,8 +14,6 @@
     --text-muted: #8194B5;
     --radius: 4px;
     --highlight: #FFD800;
-    --accent-on-light: #E8899C; 
-    --status-on-light: #C9A200;  
     --line: var(--accent-dark);
 }
 
@@ -405,14 +404,14 @@ h1, .brand {
 }
 
 .experience-category {
-    color: var(--paperdark);
+    color: var(--accent-dark);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .experience-card h2 {
-    color: var(--accent-on-light);
+    color: var(--ink-dark);
     margin: 0.5rem 0;
     font-size: 1.25rem;
 }
@@ -423,10 +422,34 @@ h1, .brand {
 }
 
 .experience-status {
-    color: var(--status-on-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     margin-top: 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: fit-content;
+    background-color: var(--ink-dark);      
+    color: var(--highlight);         
+}
+
+.experience-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--highlight);
+}
+
+.experience-status.status-done {
+    background-color: rgba(31, 41, 66, 0.5);
+    color: var(--paper);
+}
+
+.experience-status.status-done::before {
+    display: none;
 }
 
 .site-footer {
