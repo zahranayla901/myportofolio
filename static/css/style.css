@@ -234,99 +234,6 @@ h1, h2, .brand, .skill-title {
     box-shadow: 0 20px 40px rgba(51, 65, 92, 0.18);
 }
 
-/* Experience's Section */ 
-.experience-header {
-    display: flex;
-    justify-content: center;
-    padding: 1.1rem 0;
-}
- 
-.section-badge-alt .ex{
-    background-color: var(--surface);
-    border: 1px solid var(--line);
-    color: var(--ink);
-    font-family: "Fraunces", Georgia, serif;
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 600;
-    line-height: 1.15;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    font-size: 0.85rem;    
-    padding: 0.6rem 1.75rem;
-    border-radius: var(--radius-pill);
-    box-shadow: 0 8px 20px rgba(232, 137, 154, 0.25); 
-}
- 
-.experience-panel {
-    max-width: 840px;
-    margin: 0 auto;
-    background-color: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(232, 137, 154, 0.25);
-    padding: 2rem;
-}
- 
-.experience-panel .container {
-    padding: 0;
-    max-width: none;
-}
- 
-.experience-grid1 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem 2.5rem;
-    text-align: center;
-}
- 
-.experience-item {
-    width: 140px;
-}
- 
-.experience-item .logo-circle {
-    width: 84px;
-    height: 84px;
-    margin: 0 auto 0.9rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--surface);
-    border: 2px solid rgba(157, 195, 232, 0.4);
-    overflow: hidden;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-}
- 
-.experience-item .logo-circle {
-    border-color: rgba(232, 137, 154, 0.4);
-}
- 
-.experience-item .logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
- 
-.experience-item h4 {
-    font-family: "Fraunces", serif;
-    font-style: italic;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.15rem;
-}
- 
-.experience-item p {
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-}
-
-.experience-item:hover .logo-circle{
-    background-color: var(--rose-deep);
-    transform: translateY(-3px); /* up element for 3px */
-}
-/* end of experience's section */
-
 /* Skill Section */
 .skill-panel {
     padding: 3.5rem 0 6rem; /* top [left right] bottom */
@@ -438,7 +345,7 @@ h1, h2, .brand, .skill-title {
 }
 /* end of Skill section */
 
-/* experience section from tutorial */
+/* experience section */
 .experience-section {
     padding: 4rem 0 5rem;
 }
