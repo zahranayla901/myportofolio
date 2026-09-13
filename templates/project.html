@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience - {{ name }}</title>
+    <title>Project - {{ name }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
             <nav>
                 <a href="{% url 'main:show_main' %}">Profile</a>
                 <a href="{% url 'main:show_experience' %}">Experience</a>
+                <a href="{% url 'main:show_project' %}">Project</a>
             </nav>
         </div>
     </header>
@@ -28,7 +29,7 @@
         <section class="project-section">
             <h1>Project</h1>
             <div class="project-grid">
-                {% for project in projects_list %}
+                {% for project in project_list %}
                     <article class="project-card">
                         <h2>{{ project.title }}</h2>
                         <p><strong>Tech Stack:</strong> {{ project.technology }}</p>
