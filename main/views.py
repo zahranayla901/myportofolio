@@ -10,7 +10,7 @@ def show_main(request):
         "study_program": "S1 Sistem Informasi",
         "bio": (
             "IS student at Universitas Indonesia who keeps thinking when the next holiday will come."
-            "Have wide interest from robotic to geography." 
+            " Have wide interest from robotic to geography." 
             "Currently looking for future career prospects that match my interests."
         ),
     }
