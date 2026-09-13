@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience - {{ name }}</title>
+    <title>Project - {{ name }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -26,34 +26,21 @@
     </header>
 
     <main>
-        <section class="experience-section" id="experience">
-            <div class="container">
-                <p class="section-kicker">Perjalanan saya sejauh ini</p>
-                <h1>Experience</h1>
-
-                <div class="experience-grid">
-                    {% for experience in experience_list %}
-                        <article class="experience-card">
-                            <span class="experience-category">
-                                {{ experience.get_category_display }}
-                            </span>
-                            <h2>{{ experience.title }}</h2>
-                            <p class="experience-description">
-                                {{ experience.description }}
-                            </p>
-
-                            {% if experience.is_ongoing %}
-                                <p class="experience-status status-ongoing">Sedang berlangsung</p>
-                            {% else %}
-                                <p class="experience-status status-done">Selesai</p>
-                            {% endif %}
-                        </article>
-                    {% empty %}
-                        <p class="empty-state">
-                            Belum ada pengalaman yang ditambahkan.
-                        </p>
-                    {% endfor %}
-                </div>
+        <section class="project-section">
+            <h1>Project</h1>
+            <div class="project-grid">
+                {% for project in project_list %}
+                    <article class="project-card">
+                        <h2>{{ project.title }}</h2>
+                        <p><strong>Tech Stack:</strong> {{ project.technology }}</p>
+                        <p>{{ project.description }}</p>
+                        {% if project.project_url %}
+                            <a href="{{ project.project_url }}" target="_blank">View Project</a>
+                        {% endif %}
+                    </article>
+                {% empty %}
+                    <p class="empty-state">Belum ada proyek yang ditambahkan.</p>
+                {% endfor %}
             </div>
         </section>
     </main>

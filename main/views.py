@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.models import Experience
+from main.models import Experience, Project
 
 
 def show_main(request):
@@ -10,7 +10,7 @@ def show_main(request):
         "study_program": "S1 Sistem Informasi",
         "bio": (
             "IS student at Universitas Indonesia who keeps thinking when the next holiday will come."
-            "Have wide interest from robotic to geography." 
+            " Have wide interest from robotic to geography." 
             "Currently looking for future career prospects that match my interests."
         ),
     }
@@ -23,3 +23,10 @@ def show_experience(request):
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
+
+def show_project(request):
+    context = {
+        "name": "Zahra Nayla",
+        "project_list": Project.objects.all(),
+    }
+    return render(request, "project.html", context)
