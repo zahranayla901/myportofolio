@@ -31,6 +31,7 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.CharField(max_length=255)
     project_url = models.URLField(blank=True, default="")
+    thumbnail = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.title

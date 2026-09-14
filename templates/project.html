@@ -1,3 +1,6 @@
+{% load static %}
+{% load main_extras %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,7 @@
     <title>Project - {{ name }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- special thanks to cecilia yang ngajarin cara nambah favicon -->
@@ -27,19 +30,35 @@
 
     <main>
         <section class="project-section">
-            <h1>Project</h1>
-            <div class="project-grid">
-                {% for project in project_list %}
-                    <article class="project-card">
-                        <h2>{{ project.title }}</h2>
-                        <p><strong>Tech Stack:</strong> {{ project.technology }}</p>
-                        <p>{{ project.description }}</p>
-                        {% if project.project_url %}
-                            <a href="{{ project.project_url }}" target="_blank">View Project</a>
+            <div class="container">
+                <span class="section-kicker">Things I’ve built or been involved in</span>
+                <h1>Project</h1>
+                <div class="project-grid">
+                    {% for project in project_list %}
+                        {% cycle 'proj-tone-1' 'proj-tone-2' 'proj-tone-3' 'proj-tone-4' 'proj-tone-5' 'proj-tone-6' as tone silent %}
+                        <article class="project-card {{ tone }}">
+                            {% if project.thumbnail %}
+                                <div class="project-media">
+                                    <img src="{% static project.thumbnail %}" alt="Preview {{ project.title }}" loading="lazy">
+                                </div>
                         {% endif %}
+                        <div class="project-body">
+                                {% if project.technology %}
+                                    <div class="project-tech-list">
+                                        {% for tech in project.technology|split:"," %}
+                                            <span class="project-tech">{{ tech }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <h2>{{ project.title }}</h2>
+                                <p>{{ project.description|truncatewords:20 }}</p>
+                                {% if project.project_url %}
+                                    <a class="project-link" href="{{ project.project_url }}" target="_blank" rel="noopener">View Project &rarr;</a>
+                                {% endif %}
+                            </div>
                     </article>
                 {% empty %}
-                    <p class="empty-state">Belum ada proyek yang ditambahkan.</p>
+                    <p class="empty-state">No projects have been added yet.</p>
                 {% endfor %}
             </div>
         </section>
