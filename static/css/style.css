@@ -540,6 +540,229 @@ h1, h2, .brand, .skill-title {
 }
 /* end of project section */
 
+/* Project from Tutorial */
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+ 
+.project-header__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.project-header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+}
+ 
+.button-add-project {
+    display: inline-block;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--surface);
+    background-color: var(--rose-deep);
+    border-radius: var(--radius-pill);
+    padding: 0.65rem 1.4rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+ 
+.button-add-project:hover {
+    background-color: var(--serenity-deep);
+    transform: translateY(-2px);
+}
+ 
+.project-search {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+ 
+.project-search__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 1.1rem;
+    border: 1px solid rgba(157, 195, 232, 0.5);
+    border-radius: var(--radius-pill);
+    background-color: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-search__input::placeholder { 
+    color: var(--ink-soft); 
+}
+ 
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.button-search {
+    flex-shrink: 0;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--surface);
+    background-color: var(--rose-deep);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button-search:hover {
+    background-color: var(--serenity-deep);
+    transform: translateY(-2px);
+}
+ 
+.project-delete-form {
+    margin: 0;
+}
+ 
+.project-delete-button {
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--rose-deep);
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(232, 137, 154, 0.45);
+    border-radius: var(--radius-pill);
+    padding: 0.35rem 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+ 
+.project-delete-button:hover {
+    background-color: #b42318;
+    border-color: #b42318;
+    color: #fff;
+}
+
+/* Add New Project page */
+/* ===== FORM PAGE (Add New Project) ===== */
+.form-section {
+    padding: 3.5rem 0 5rem;
+}
+
+.form-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    box-shadow: 0 16px 40px rgba(157, 195, 232, 0.25);
+}
+
+.form-card h1 {
+    margin: 0.4rem 0 2rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.form-field label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.45rem;
+}
+
+.project-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+    width: 100%;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background-color: var(--bg);
+    border: 1px solid rgba(157, 195, 232, 0.5);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+}
+
+.project-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.project-form input:focus,
+.project-form textarea:focus {
+    outline: none;
+    border-color: var(--serenity-deep);
+    box-shadow: 0 0 0 3px var(--serenity-soft);
+}
+
+.form-error {
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--rose-deep);
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.button-submit {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--surface);
+    background-color: var(--rose-deep);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button-submit:hover {
+    background-color: var(--serenity-deep);
+    transform: translateY(-2px);
+}
+
+.button-cancel {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--ink);
+    background-color: var(--serenity-soft);
+    border: 1px solid rgba(157, 195, 232, 0.45);
+    border-radius: var(--radius-pill);
+    padding: 0.65rem 1.4rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button-cancel:hover {
+    background-color: var(--ink);
+    color: var(--surface);
+    border-color: var(--ink);
+}
+/* end of form page */
+/* end of project from tutorial */
+
+
 .site-footer {
     padding: 1.75rem;
     color: var(--ink-soft);
@@ -563,5 +786,14 @@ h1, h2, .brand, .skill-title {
 
     .social-links {
         justify-content: flex-start;
+    }
+
+    .project-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-card {
+        padding: 1.5rem;
     }
 }
