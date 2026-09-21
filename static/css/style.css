@@ -379,6 +379,7 @@ h1, h2, .brand, .skill-title {
     transform: translateY(-2px);
 }
 
+/* experience search bar and button section */
 .experience-search {
     display: flex;
     gap: 0.75rem;
@@ -408,6 +409,7 @@ h1, h2, .brand, .skill-title {
 .experience-search__input::placeholder {
     color: var(--ink-soft);
 }
+/* Divider */
 
 .experience-grid {
     display: grid;
@@ -488,6 +490,7 @@ h1, h2, .brand, .skill-title {
     display: none;
 }
 
+/* Align the Delete and Edit buttons so they're aligned, not stacked, and with a gap */
 .experience-actions {
     display: flex;
     align-items: center;
@@ -495,10 +498,12 @@ h1, h2, .brand, .skill-title {
     margin-top: 1rem;
 }
 
+/* experience delete button section */
 .experience-delete-form {
     margin: 0;
 }
- 
+
+.experience-edit-button,
 .experience-delete-button {
     display: inline-block;
     font-family: inherit;
@@ -510,6 +515,20 @@ h1, h2, .brand, .skill-title {
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+
+/* experience edit button section */
+.experience-edit-button {
+    color: var(--serenity-deep);
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(157, 195, 232, 0.45);
+}
+ 
+.experience-edit-button:hover {
+    background-color: var(--serenity-deep);
+    border-color: var(--serenity-deep);
+    color: var(--surface);
+}
+/* Divider */
 
 .experience-delete-button {
     color: var(--rose-deep);
