@@ -1,8 +1,4 @@
-Nama: Zahra Nayla Azfa
-
-NPM: 2506534163
-
-Kelas: PBP E
+| Zahra Nayla Azfa | 2506534163 | PBP-E |
 
 ### Tugas 1
 1. Dalam pengerjaan tugas individu 1 ini, saya menggunakan elemen semantik HTML5 berupa section. penggunaan section sangat membantu dalam organize my program. batasan section memperjelas fungsi bagian program tersebut, misalnya kayak misahin part profile dengan part experiences.
@@ -24,6 +20,18 @@ AI Disclosure: Dalam pengerjaan proyek tugas individu 1, saya menggunakan bantua
 Contohnya ketika menambahkan thumbnail untuk project. makemigrations membuat file migrasi baru bernama 0003_project_thumbnail.py lalu migrate mengaplikasikan file tersebut ke database agar thumbnail tersimpan dalam tabel database.
 
 AI Disclosure: Dalam pengerjaan proyek tugas individu 2, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging dan add/delete input data karena tidak adanya sinkronisasi antara pws dengan lokal. Pemakaian lainnya ada pada permintaan style agar warna block pada project bisa otomatis berganti dalam scope yang ditentukan.
+
+### Tugas 3
+1. Penggunaan ModelForm didasarkan pada efisiensi. Dengan ModelForm, field HTML otomatis digenerate dari struktur model yang sudah ada dalam models.py seperti tipe data. Hal ini meringankan beban memasukkan validasi dan input secara manual untuk tiap file HTML. Lalu adanya kemudahan penyimpanan database dengan .save() dan pengembalian invalid input langsung pada HTML.
+{% csrf_token %} digunakan untuk mencegah CSRF (Cross-Site Request Forgery). Dengan token unik terenkripsi, form request dipastikan valid dari User dan bukan pihak ketiga. Intinya csrf_token mastiin keamanan dan validitas request berdasarkan kecocokan dengan token unik terenkripsi.
+
+2. JSON lebih disukai karena ukuran sintaksnya lebih ringkas dibandingkan XML yang perlu closing tag setiap elemen. Hal ini menyebabkan payload data lebih kecil yang membuat proses parsing di server menjadi lebih cepat. Selain itu, JSON lebih mudah dibaca oleh developer karena struktur datanya yang mirip sebagian besar bahasa pemrograman modern dan tidak perlu menggunakan library tambahan karena JSON sendiri terinspirasi dari JavaScript.
+
+3. Browsser ngirim req HTTP ke URL --> path URL dicocokkan dengan fungsi view --> View ngambil queryset dari db yang berisi objek Python --> Objek diproses oleh serializers --> Objek dikonversi menjadi struktur data format teks JSON --> Hasil tadi dibungkus dengan HttpResponse atau JsonResponse dengan content_type="application/json" --> HttpResponse dikembalikan ke browser --> browser ngerender JSON dan menampilkan halaman tersebut pada User.
+Serialization diperlukan karena HTTP hanya bisa mengirim data berbentuk bytes, sementara objek model Django berbentuk objek Python kompleks yang menyimpan referensi ke db. Disini serialization dipakai untuk mengonversi objek tersebut menjadi format bytes yang dapat dikirim dan dipahami bahasa pemrograman. intinya sebagai translator.
+
+AI Disclosure: Dalam pengerjaan proyek tugas individu 3, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging run local, deploy pws, dan set DateField.
+log prompting: https://claude.ai/share/ffb755f7-c32a-4d04-b3d0-ee653db096a5 
 
 Special thx to:
 - cecilia yang ngajarin input favicon
