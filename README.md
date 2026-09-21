@@ -1,3 +1,5 @@
+| Nama | NPM | Kelas |
+| :--- | :---: | ---: |
 | Zahra Nayla Azfa | 2506534163 | PBP-E |
 
 ### Tugas 1
