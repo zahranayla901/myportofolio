@@ -379,6 +379,36 @@ h1, h2, .brand, .skill-title {
     transform: translateY(-2px);
 }
 
+.experience-search {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 1.5rem 0 2rem;
+}
+
+.experience-search__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 1.1rem;
+    border: 1px solid rgba(157, 195, 232, 0.5);
+    border-radius: var(--radius-pill);
+    background-color: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experience-search__input:focus {
+    outline: none;
+    border-color: var(--serenity-deep);
+    box-shadow: 0 0 0 3px var(--serenity-soft);
+}
+
+.experience-search__input::placeholder {
+    color: var(--ink-soft);
+}
+
 .experience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -456,6 +486,41 @@ h1, h2, .brand, .skill-title {
 
 .experience-status.status-done::before {
     display: none;
+}
+
+.experience-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.experience-delete-form {
+    margin: 0;
+}
+ 
+.experience-delete-button {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius-pill);
+    padding: 0.35rem 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.experience-delete-button {
+    color: var(--rose-deep);
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(232, 137, 154, 0.45);
+}
+ 
+.experience-delete-button:hover {
+    background-color: #b42318;
+    border-color: #b42318;
+    color: #fff;
 }
 
 /* experience form section*/

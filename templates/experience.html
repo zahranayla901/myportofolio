@@ -12,6 +12,16 @@
                 <h1>Experience</h1>
                 <a href="{% url 'main:create_experience' %}" class="button-add-experience">+ Add Experience</a>
 
+                <form method="get" action="{% url 'main:show_experience' %}" class="experience-search">
+                    <input type="search"
+                           name="title"
+                           value="{{ title_query }}"
+                           placeholder="Search based on experience title"
+                           class="experience-search__input"
+                           aria-label="Search based on experience title">
+                    <button type="submit" class="button-search">Search</button>          
+                </form>
+
                 <div class="experience-grid">
                     {% for experience in experience_list %}
                         <article class="experience-card">
@@ -24,10 +34,21 @@
                             </p>
 
                             {% if experience.is_ongoing %}
-                                <p class="experience-status status-ongoing">Sedang berlangsung</p>
+                                <p class="experience-status status-ongoing">Ongoing</p>
                             {% else %}
-                                <p class="experience-status status-done">Selesai</p>
+                                <p class="experience-status status-done">Finish</p>
                             {% endif %}
+
+                            <div class="experience-actions">
+                                <form method="post"
+                                      action="{% url 'main:delete_experience' experience.id %}"
+                                      onsubmit="return confirm('Delete experience \'{{ experience.title }}\'?');"
+                                      class="experience-delete-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="experience-delete-button">Delete Experience</button>
+                                </form>
+                            </div>
+
                         </article>
                     {% empty %}
                         <p class="empty-state">
