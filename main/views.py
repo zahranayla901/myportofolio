@@ -116,7 +116,7 @@ def get_experience_json(request):
     return HttpResponse(experience_json, content_type="application/json")
 
 # func to delete existing experience from db (D from CRUD)
-def delete_Experience(request, experience_id):
+def delete_experience(request, experience_id):
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
