@@ -14,7 +14,13 @@
                         <span class="section-kicker">Things I've built or been involved in</span>
                         <h1>Project</h1>
                     </div>
-                    <a href="{% url 'main:create_project' %}" class="button-add-project">+ Add Project</a>
+                    {% if user.is_superuser %}  
+                        <a href="{% url 'main:create_project' %}"
+                        class="button project-add-button">
+                            <span aria-hidden="true">+</span>
+                            Add Project
+                        </a>
+                    {% endif %}                 
                 </div>
 
                 <form method="get" action="{% url 'main:show_project' %}" class="project-search">
@@ -44,6 +50,10 @@
                                     {% if project.project_url %}
                                         <a class="project-link" href="{{ project.project_url }}" target="_blank" rel="noopener">View Project &rarr;</a>
                                     {% endif %}
+
+                                    {% include "components/project_star.html" with project=project %}
+
+                                    {% if user.is_superuser %}
                                     <form method="post"
                                           action="{% url 'main:delete_project' project.id %}"
                                           onsubmit="return confirm('Hapus proyek \'{{ project.title }}\'?');"
@@ -51,6 +61,8 @@
                                         {% csrf_token %}
                                         <button type="submit" class="project-delete-button">Hapus Proyek</button>
                                     </form>
+                                    {% endif %}
+                                     
                                 </div>
                             </div>
                         </article>

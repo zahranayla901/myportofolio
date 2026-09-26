@@ -1,4 +1,6 @@
 import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 
 class Experience(models.Model):
@@ -31,7 +33,11 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.CharField(max_length=255)
     project_url = models.URLField(blank=True, default="")
-    thumbnail = models.CharField(max_length=255, blank=True, null=True)
+    thumbnail = models.URLField(blank=True, max_length=500, default="")
+    
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_projects", blank=True
+    )
 
     def __str__(self):
         return self.title

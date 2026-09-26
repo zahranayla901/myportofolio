@@ -44,7 +44,7 @@ class ProjectForm(ModelForm):
                     "placeholder": "https://github.com/zahranayla901/myportofolio",
                 }
             ),
-            "thumbnail": TextInput(
+            "thumbnail": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000",
                 }
