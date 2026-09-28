@@ -50,9 +50,9 @@
                                     {% if project.project_url %}
                                         <a class="project-link" href="{{ project.project_url }}" target="_blank" rel="noopener">View Project &rarr;</a>
                                     {% endif %}
-
+                                     <!-- {% if user.is_authenticated %} -->
                                     {% include "components/project_star.html" with project=project %}
-
+                                    <!-- {% end if}-->
                                     {% if user.is_superuser %}
                                     <form method="post"
                                           action="{% url 'main:delete_project' project.id %}"

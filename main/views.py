@@ -10,7 +10,10 @@ from main.models import Experience, Project
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required  
-from django.core.exceptions import PermissionDenied   
+from django.core.exceptions import PermissionDenied
+
+def user_is_editor(user):
+    return user.is_authenticated and user.groups.filter(name="Editor").exists()
 
 def show_main(request):
     last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
@@ -103,11 +106,17 @@ def show_experience(request):
         "name": "Zahra Nayla",
         "experience_list": experience,
         "title_query": title_query,
+        "is_editor": user_is_editor(request.user),
     }
     return render(request, "experience.html", context)
 
 # func to create new experience (C from CRUD)
+# login required to create, Edit, and Delete
+@login_required(login_url="/login/")
 def create_experience(request):
+    if (request.user.is_superuser != True): # Only superuser can create and delete
+        raise PermissionDenied
+    
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -133,7 +142,12 @@ def get_experience_json(request):
     return HttpResponse(experience_json, content_type="application/json")
 
 # func to edit existing experience (U from CRUD)
+# editor can edit experience
+@login_required(login_url="/login/")
 def edit_experience(request, experience_id):
+    if ((request.user.is_superuser or user_is_editor(request.user)) != True):
+        raise PermissionDenied
+
     experience = get_object_or_404(Experience, pk=experience_id)
     form = ExperienceForm(request.POST or None, instance=experience)
  
@@ -150,7 +164,11 @@ def edit_experience(request, experience_id):
     return render(request, "experience_form.html", context)
 
 # func to delete existing experience from db (D from CRUD)
+@login_required(login_url="/login/")
 def delete_experience(request, experience_id):
+    if (request.user.is_superuser != True):
+        raise PermissionDenied
+    
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
