@@ -138,7 +138,9 @@ def get_experience_json(request):
     if title_query:
         experience = experience.filter(title__icontains=title_query)
 
-    experience_json = serializers.serialize("json", experience)
+    experience_json = serializers.serialize(
+        "json", experience, use_natural_foreign_keys=True
+    )
     return HttpResponse(experience_json, content_type="application/json")
 
 # func to edit existing experience (U from CRUD)
