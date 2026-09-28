@@ -47,6 +47,15 @@
                             {% endif %}
 
                             <div class="experience-actions">
+                                {% if user.is_authenticated %}
+                                    {% include "components/experience_star.html" with experience=experience %}
+                                {% else %}
+                                    <a href="{% url 'main:login' %}?next={{ request.path }}" class="button button-star">
+                                        <span aria-hidden="true">★</span> Star
+                                        <span class="star-count">{{ experience.starred_by.count }}</span>
+                                    </a>
+                                {% endif %}
+
                                 {% if user.is_superuser or is_editor %}
                                     <a href="{% url 'main:edit_experience' experience.id %}" class="experience-edit-button">Edit</a> 
                                 {% endif %}
