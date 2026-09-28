@@ -52,7 +52,7 @@
                                     {% endif %}
                                      <!-- {% if user.is_authenticated %} -->
                                     {% include "components/project_star.html" with project=project %}
-                                    <!-- {% end if}-->
+                                    <!-- {% endif %}-->
                                     {% if user.is_superuser %}
                                     <form method="post"
                                           action="{% url 'main:delete_project' project.id %}"

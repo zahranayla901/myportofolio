@@ -114,7 +114,7 @@ def show_experience(request):
 # login required to create, Edit, and Delete
 @login_required(login_url="/login/")
 def create_experience(request):
-    if (request.user.is_superuser != True): # Only superuser can create and delete
+    if not request.user.is_superuser: # Only superuser can create and delete
         raise PermissionDenied
     
     form = ExperienceForm(request.POST or None)
@@ -145,7 +145,7 @@ def get_experience_json(request):
 # editor can edit experience
 @login_required(login_url="/login/")
 def edit_experience(request, experience_id):
-    if ((request.user.is_superuser or user_is_editor(request.user)) != True):
+    if not (request.user.is_superuser or user_is_editor(request.user)):
         raise PermissionDenied
 
     experience = get_object_or_404(Experience, pk=experience_id)
@@ -166,7 +166,7 @@ def edit_experience(request, experience_id):
 # func to delete existing experience from db (D from CRUD)
 @login_required(login_url="/login/")
 def delete_experience(request, experience_id):
-    if (request.user.is_superuser != True):
+    if not request.user.is_superuser:
         raise PermissionDenied
     
     experience = get_object_or_404(Experience, pk=experience_id)
