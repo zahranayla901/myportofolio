@@ -35,6 +35,10 @@ Serialization diperlukan karena HTTP hanya bisa mengirim data berbentuk bytes, s
 AI Disclosure: Dalam pengerjaan proyek tugas individu 3, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging run local, deploy pws, dan set DateField.
 log prompting: https://claude.ai/share/ffb755f7-c32a-4d04-b3d0-ee653db096a5 
 
+### Tugas 4 
+AI Disclosure: Dalam pengerjaan proyek tugas individu 4, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging run local, deploy pws, dan struktur html.
+log prompting: https://claude.ai/share/f51e31e9-01a7-46c2-9c58-8d697e73e60a 
+
 Special thx to:
 - cecilia yang ngajarin input favicon
 - melin dengan carousalnya
