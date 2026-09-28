@@ -50,9 +50,16 @@
                                     {% if project.project_url %}
                                         <a class="project-link" href="{{ project.project_url }}" target="_blank" rel="noopener">View Project &rarr;</a>
                                     {% endif %}
-
-                                    {% include "components/project_star.html" with project=project %}
-
+                                
+                                    {% if user.is_authenticated %}
+                                        {% include "components/project_star.html" with project=project %}
+                                    {% else %}
+                                        <a href="{% url 'main:login' %}?next={{ request.path }}" class="button button-star">
+                                            <span aria-hidden="true">★</span> Star
+                                            <span class="star-count">{{ project.starred_by.count }}</span>
+                                        </a>
+                                    {% endif %}
+                        
                                     {% if user.is_superuser %}
                                     <form method="post"
                                           action="{% url 'main:delete_project' project.id %}"

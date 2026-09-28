@@ -10,7 +10,10 @@ from main.models import Experience, Project
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required  
-from django.core.exceptions import PermissionDenied   
+from django.core.exceptions import PermissionDenied
+
+def user_is_editor(user):
+    return user.is_authenticated and user.groups.filter(name="Editor").exists()
 
 def show_main(request):
     last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
@@ -103,11 +106,17 @@ def show_experience(request):
         "name": "Zahra Nayla",
         "experience_list": experience,
         "title_query": title_query,
+        "is_editor": user_is_editor(request.user),
     }
     return render(request, "experience.html", context)
 
 # func to create new experience (C from CRUD)
+# login required to create, Edit, and Delete
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not request.user.is_superuser: # Only superuser can create and delete
+        raise PermissionDenied
+    
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -129,11 +138,18 @@ def get_experience_json(request):
     if title_query:
         experience = experience.filter(title__icontains=title_query)
 
-    experience_json = serializers.serialize("json", experience)
+    experience_json = serializers.serialize(
+        "json", experience, use_natural_foreign_keys=True
+    )
     return HttpResponse(experience_json, content_type="application/json")
 
 # func to edit existing experience (U from CRUD)
+# editor can edit experience
+@login_required(login_url="/login/")
 def edit_experience(request, experience_id):
+    if not (request.user.is_superuser or user_is_editor(request.user)):
+        raise PermissionDenied
+
     experience = get_object_or_404(Experience, pk=experience_id)
     form = ExperienceForm(request.POST or None, instance=experience)
  
@@ -150,7 +166,11 @@ def edit_experience(request, experience_id):
     return render(request, "experience_form.html", context)
 
 # func to delete existing experience from db (D from CRUD)
+@login_required(login_url="/login/")
 def delete_experience(request, experience_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
@@ -210,3 +230,16 @@ def toggle_star(request, project_id):
             project.starred_by.add(request.user)
 
     return redirect("main:show_project")
+
+# toggle star untuk page experience, di restrict dengan login
+@login_required(login_url="/login/")
+def toggle_star_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+
+    return redirect("main:show_experience")
