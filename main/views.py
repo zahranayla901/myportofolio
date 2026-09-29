@@ -3,14 +3,14 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 import datetime
-
-from main.forms import ProjectForm, ExperienceForm
-from main.models import Experience, Project
-
+from main.forms import *
+from main.models import *
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import *
 from django.contrib.auth.decorators import login_required  
 from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 def user_is_editor(user):
     return user.is_authenticated and user.groups.filter(name="Editor").exists()
@@ -31,19 +31,12 @@ def show_main(request):
     return render(request, "index.html", context)
 
 def show_project(request):
-    json_response = get_project_json(request)
-
-    project = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    project = [project.object for project in project]
     title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Zahra Nayla",
-        "project_list": project,
         "title_query": title_query,
+        "form": ProjectForm(),
     }
     return render(request, "project.html", context)
 
@@ -65,17 +58,53 @@ def create_project(request):
     }
     return render(request, "project_form.html", context)
 
+@require_POST
+def create_project_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan proyek."},
+            status=403,
+        )
+
+    form = ProjectForm(request.POST)
+    if form.is_valid():
+        project = form.save()
+        return JsonResponse(
+            {"message": "Proyek berhasil ditambahkan.", "pk": str(project.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
 def get_project_json(request):
     title_query = request.GET.get("title", "").strip()
-    project = Project.objects.all()
+    project = Project.objects.prefetch_related('starred_by').all()
 
     if title_query:
         project = project.filter(title__icontains=title_query)
 
-    project_json = serializers.serialize(
-        "json", project, use_natural_foreign_keys=True  # Tambahkan argumen ini
-    )
-    return HttpResponse(project_json, content_type="application/json")
+    # Konstruksi data JSON secara manual agar bisa menyisipkan logika Star
+    data = []
+    for p in project:
+        starred_users = p.starred_by.all()
+        is_starred = request.user in starred_users if request.user.is_authenticated else False
+        starred_by_names = ", ".join([u.username for u in starred_users])
+
+        data.append({
+            "pk": str(p.id),
+            "fields": {
+                "title": p.title,
+                "description": p.description,
+                "tech_stack": p.technology,
+                "project_url": p.project_url,
+                "project_thumbnail": p.thumbnail,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 @login_required(login_url="/login/")
 def delete_project(request, project_id):

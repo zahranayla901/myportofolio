@@ -10,6 +10,7 @@ urlpatterns = [
     path("api/project/", get_project_json, name="get_project_json"),
     path("project/<uuid:project_id>/delete/",delete_project,name="delete_project"),
     path("project/<uuid:project_id>/star/", toggle_star, name="toggle_star"),
+    path("projects/add-ajax/", create_project_ajax, name="create_project_ajax"),
 
     path("experience/", show_experience, name="show_experience"),
     path("experience/add/", create_experience, name="create_experience"),
