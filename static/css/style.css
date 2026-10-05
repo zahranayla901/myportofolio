@@ -982,7 +982,7 @@ h1, h2, .brand, .skill-title {
     background: var(--ink);
 }
 
-.button-star.is-starred-exp {
+.button-star-exp.is-starred-exp {
     background: var(--rose-deep);
 }
 
@@ -1173,4 +1173,25 @@ h1, h2, .brand, .skill-title {
         width: 100%;
         text-align: center;
     }
+}
+
+/* experience ajax */
+.button-add-experience {
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.experience-thumbnail {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 0.75rem;
+}
+
+.experience-period {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.5rem;
 }
