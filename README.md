@@ -39,6 +39,19 @@ log prompting: https://claude.ai/share/ffb755f7-c32a-4d04-b3d0-ee653db096a5
 AI Disclosure: Dalam pengerjaan proyek tugas individu 4, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging run local, deploy pws, dan struktur html.
 log prompting: https://claude.ai/share/f51e31e9-01a7-46c2-9c58-8d697e73e60a 
 
+### Tugas 5
+1. Debouncing adalah teknik untuk menunda sebuah fungsi hingga suatu jeda waktu berlalu tanpa event baru. Mekanisme ini memastikan browser hanya mengirimkan permintaan setelah User jeda mengetik selama beberapa saat.
+Teknik ini diperlukan pada fitur pencarian berbasis AJAX karena dapat mengurangi beban server, menghemat bandwidth, dan mencegah race condition. Intinya debouncing ini mencegah pengiriman req berulang ke server dan hanya mengirim input terakhir.
+
+2. await berfungsi menahan eksekusi baris selanjutnya dalam fungsi async sampai objek Promise yang dikembalikan oleh fetch() selesai diproses dan mengembalikan objek Response.
+Kalau await tidak digunakan, maka fetch() bakal langsung ngembaliin objek Promise dengan status pending, bukan response dari server. Risiko kesalahan dalam pemrosesan data akan meningkat karena menggunakan objek yang belum selesai diproses.
+
+3. Cross-Site Scripting (XSS) adalah serangan ketika penyerang berhasil menyisipkan kode JavaScript miliknya ke dalam halaman web yang kemudian dijalankan di browser pengguna lain.
+Data yang ditampilkan melalui AJAX/JS lebih rentan karena mereka memiliki sifat dinamis. Selain itu, template Django memiliki fitur proteksi bawaan, sehingga tidak perlu sanitasi manual.
+
+AI disclosure: Dalam pengerjaan proyek tugas individu 5, saya menggunakan bantuan AI berupa Claude Sonnet 5 version. Penggunaan AI paling banyak pada debugging github. Awalnya sempat ada error karena discrepancy antara lokal dan github padahal sudah pull origin main. Claude langsung memberi saran overwrite permanen tanpa mencoba mencari dulu kesalahannya. Karena khawatir, saya akhirnya menelusuri history commit satu per satu dan menemukan letak kesalahannya. Ternyata merge terakhir ini ikut menyatukan merge #6 yang mana masih menyimpan data tugas 4, sehingga perubahan pada tutorial 5 teroverwrite.
+log prompting: https://claude.ai/share/55cc2720-5b69-4338-a9f5-a2740b922ccc 
+
 Special thx to:
 - cecilia yang ngajarin input favicon
 - melin dengan carousalnya
