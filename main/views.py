@@ -121,6 +121,23 @@ def delete_project(request, project_id):
 
     return redirect("main:show_project")
 
+@require_POST
+@login_required(login_url="/login/")
+def delete_project_ajax(request, project_id):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can delete projects."},
+            status=403,
+        )
+
+    project = get_object_or_404(Project, pk=project_id)
+    project.delete()
+
+    return JsonResponse(
+        {"message": "Project deleted successfully."},
+        status=200,
+    )
+
 # experience section
 # data diambil mandiri sama JS
 def show_experience(request):
