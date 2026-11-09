@@ -96,13 +96,20 @@
     </dialog>
     {% endif %}
 
+    <div id="experience-config"
+         data-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}"
+         data-superuser="{% if user.is_superuser %}true{% else %}false{% endif %}"
+         data-can-edit="{% if user.is_superuser or is_editor %}true{% else %}false{% endif %}"
+         hidden></div>
+
     <script>
     // Konfigurasi. Semua data diambil dan diubah lewat API /api/v1/experiences/.
     const EXPERIENCE_ENDPOINT = "{% url 'api:experience-list' %}";
     const LOGIN_URL = "{% url 'main:login' %}?next={{ request.path|urlencode }}";
-    const IS_AUTHENTICATED = {% if user.is_authenticated %}true{% else %}false{% endif %};
-    const IS_SUPERUSER = {% if user.is_superuser %}true{% else %}false{% endif %};
-    const CAN_EDIT = {% if user.is_superuser or is_editor %}true{% else %}false{% endif %};
+    const experienceConfig = document.getElementById('experience-config');
+    const IS_AUTHENTICATED = experienceConfig.dataset.authenticated === "true";
+    const IS_SUPERUSER = experienceConfig.dataset.superuser === "true";
+    const CAN_EDIT = experienceConfig.dataset.canEdit === "true";
     const SEARCH_DEBOUNCE_DELAY = 400;
 
     const CATEGORY_LABELS = {
