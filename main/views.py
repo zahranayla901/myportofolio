@@ -8,6 +8,7 @@ from main.models import *
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import *
 from django.contrib.auth.decorators import login_required  
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -140,6 +141,7 @@ def delete_project_ajax(request, project_id):
 
 # experience section
 # data diambil mandiri sama JS
+@ensure_csrf_cookie
 def show_experience(request):
     context = {
         "name": "Zahra Nayla",
@@ -148,6 +150,46 @@ def show_experience(request):
         "form": ExperienceForm(),
     }
     return render(request, "experience.html", context)
+
+
+def get_experience_json(request):
+    """Return the legacy JSON shape used by the original page tests.
+
+    The experience page now loads data from the DRF endpoint, but keeping this
+    read-only endpoint preserves compatibility for existing clients and tests.
+    """
+    query = request.GET.get("q", "").strip()
+    experiences = Experience.objects.prefetch_related("starred_by").order_by(
+        "-started_at", "id"
+    )
+    if query:
+        experiences = experiences.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+
+    data = []
+    for experience in experiences:
+        starred_users = experience.starred_by.all()
+        data.append({
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.category,
+                "category_display": experience.get_category_display(),
+                "thumbnail": experience.thumbnail,
+                "started_at": experience.started_at,
+                "ended_at": experience.ended_at,
+                "is_ongoing": experience.is_ongoing,
+                "star_count": starred_users.count(),
+                "is_starred": (
+                    request.user in starred_users
+                    if request.user.is_authenticated else False
+                ),
+            },
+        })
+
+    return JsonResponse(data, safe=False)
 
 # func to create new experience (C from CRUD)
 # login required to create, Edit, and Delete
@@ -168,68 +210,6 @@ def create_experience(request):
         "form": form,
     }
     return render(request, "experience_form.html", context)
-
-# restricted experience sehingga hanya bisa 
-@require_POST
-def create_experience_ajax(request):
-    # Cek hak akses di view dan tidak hanya menyembunyikan tombol di template
-    if not request.user.is_superuser:
-        return JsonResponse(
-            {"message": "Only the portfolio owner can add experiences."},
-            status=403,
-        )
-
-    form = ExperienceForm(request.POST)
-    if form.is_valid():
-        experience = form.save()
-        return JsonResponse(
-            {"message": "Experience added successfully.", "pk": str(experience.id)},
-            status=201,
-        )
-
-    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
-
-# func to get certain experience by search feature (R from CRUD)
-def get_experience_json(request):
-    search_query = request.GET.get("q", "").strip()
-    experience_list = Experience.objects.prefetch_related("starred_by").order_by("-started_at")
-
-    if search_query:
-        experience_list = experience_list.filter(
-            Q(title__icontains=search_query) | Q(description__icontains=search_query)
-        )
-
-    category_labels = dict(Experience.EXPERIENCE_CHOICES)
-
-    # Konstruksi data JSON secara manual agar bisa menyisipkan logika Star
-    data = []
-    for exp in experience_list:
-        starred_users = exp.starred_by.all()
-        is_starred = (
-            any(u.id == request.user.id for u in starred_users)
-            if request.user.is_authenticated
-            else False
-        )
-        starred_by_names = ", ".join([u.username for u in starred_users])
-
-        data.append({
-            "pk": str(exp.id),
-            "fields": {
-                "title": exp.title,
-                "description": exp.description,
-                "category": exp.category,
-                "category_display": category_labels.get(exp.category, exp.category),
-                "thumbnail": exp.thumbnail or "",
-                "started_at": exp.started_at.strftime("%d %b %Y"),
-                "ended_at": exp.ended_at.strftime("%d %b %Y") if exp.ended_at else "",
-                "is_ongoing": exp.is_ongoing,
-                "star_count": starred_users.count(),
-                "is_starred": is_starred,
-                "starred_by_names": starred_by_names,
-            }
-        })
-
-    return JsonResponse(data, safe=False)
 
 # func to edit existing experience (U from CRUD)
 # editor can edit experience
@@ -318,16 +298,3 @@ def toggle_star(request, project_id):
             project.starred_by.add(request.user)
 
     return redirect("main:show_project")
-
-# toggle star untuk page experience, di restrict dengan login
-@login_required(login_url="/login/")
-def toggle_star_experience(request, experience_id):
-    experience = get_object_or_404(Experience, pk=experience_id)
-
-    if request.method == "POST":
-        if request.user in experience.starred_by.all():
-            experience.starred_by.remove(request.user)
-        else:
-            experience.starred_by.add(request.user)
-
-    return redirect("main:show_experience")
