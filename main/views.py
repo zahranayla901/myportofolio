@@ -8,6 +8,7 @@ from main.models import *
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import *
 from django.contrib.auth.decorators import login_required  
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -140,6 +141,7 @@ def delete_project_ajax(request, project_id):
 
 # experience section
 # data diambil mandiri sama JS
+@ensure_csrf_cookie
 def show_experience(request):
     context = {
         "name": "Zahra Nayla",
