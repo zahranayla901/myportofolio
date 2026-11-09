@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from main.models import Project, Experience
 from main.permissions import (
-    IsPortfolioOwnerOrEditorOrReadOnly,
+    IsPortfolioOwnerOrEditorOrReadOnly, IsPortfolioOwnerOrReadOnly
 )
 from main.serializers import ProjectSerializer, ExperienceSerializer
 
@@ -71,13 +71,15 @@ def project_star(request, project_id):
 
 @api_view(["GET", "HEAD", "POST"])
 @authentication_classes([SessionAuthentication])
-@permission_classes([IsPortfolioOwnerOrEditorOrReadOnly])
+@permission_classes([IsPortfolioOwnerOrReadOnly])
 def experience_list(request):
     if request.method in ("GET", "HEAD"):
         experiences = Experience.objects.prefetch_related("starred_by").order_by("-started_at", "id")
-        title = request.query_params.get("q", "").strip()
-        if title:
-            experiences = experiences.filter(title__icontains=title)
+        q = request.query_params.get("q", "").strip()
+        if q:
+            experiences = experiences.filter(
+                Q(title__icontains=q) | Q(description__icontains=q)
+            )
         serializer = ExperienceSerializer(
             experiences, many=True, context={"request": request},
         )
@@ -90,7 +92,7 @@ def experience_list(request):
 
 @api_view(["GET", "HEAD", "PUT", "PATCH", "DELETE"])
 @authentication_classes([SessionAuthentication])
-@permission_classes([IsPortfolioOwnerOrEditorOrReadOnly])
+@permission_classes([IsPortfolioOwnerOrReadOnly])
 def experience_detail(request, experience_id):
     experience = get_object_or_404(
         Experience.objects.prefetch_related("starred_by"), pk=experience_id,
