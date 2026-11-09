@@ -98,7 +98,7 @@
 
     <script>
     // Konfigurasi. Semua data diambil dan diubah lewat API /api/v1/experiences/.
-    const API_LIST_URL = "{% url 'api:experience-list' %}";
+    const EXPERIENCE_ENDPOINT = "{% url 'api:experience-list' %}";
     const LOGIN_URL = "{% url 'main:login' %}?next={{ request.path|urlencode }}";
     const IS_AUTHENTICATED = {% if user.is_authenticated %}true{% else %}false{% endif %};
     const IS_SUPERUSER = {% if user.is_superuser %}true{% else %}false{% endif %};
@@ -268,7 +268,7 @@
         experiencesAbortController = new AbortController();
 
         displayPageSection({ showLoading: true });
-        const url = q ? `${API_LIST_URL}?q=${encodeURIComponent(q)}` : API_LIST_URL;
+        const url = q ? `${EXPERIENCE_ENDPOINT}?q=${encodeURIComponent(q)}` : EXPERIENCE_ENDPOINT;
 
         try {
             const response = await fetch(url, {
@@ -306,7 +306,7 @@
         const exp = items.get(id);
 
         if (button.dataset.action === 'star') {
-            const result = await apiRequest(`${API_LIST_URL}${id}/star/`, "POST");
+            const result = await apiRequest(`${EXPERIENCE_ENDPOINT}${id}/star/`, "POST");
             if (!result.ok) return notifyError(result);
             replaceCard(result.data);
         } else if (button.dataset.action === 'edit') {
@@ -319,7 +319,7 @@
     async function deleteExperience(id, exp) {
         if (!confirm(`Delete experience '${exp.title}'?`)) return;
 
-        const result = await apiRequest(`${API_LIST_URL}${id}/`, "DELETE");
+        const result = await apiRequest(`${EXPERIENCE_ENDPOINT}${id}/`, "DELETE");
         if (!result.ok) return notifyError(result);
 
         items.delete(id);
@@ -351,7 +351,7 @@
             if (submitButton) submitButton.disabled = true;
 
             try {
-                const result = await apiRequest(API_LIST_URL, "POST", payloadFromForm(experienceForm));
+                const result = await apiRequest(EXPERIENCE_ENDPOINT, "POST", payloadFromForm(experienceForm));
                 if (!result.ok) return notifyError(result);
 
                 experienceForm.reset();
@@ -398,7 +398,7 @@
                 return;
             }
 
-            const result = await apiRequest(`${API_LIST_URL}${id}/`, "PATCH", changes);
+            const result = await apiRequest(`${EXPERIENCE_ENDPOINT}${id}/`, "PATCH", changes);
             if (!result.ok) return notifyError(result);
 
             replaceCard(result.data);

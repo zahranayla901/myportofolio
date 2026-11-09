@@ -15,6 +15,7 @@ urlpatterns = [
     path("project/<uuid:project_id>/delete-ajax/", views.delete_project_ajax, name="delete_project_ajax"),
 
     path("experience/", show_experience, name="show_experience"),
+    path("api/experience/", get_experience_json, name="get_experience_json"),
     path("experience/add/", create_experience, name="create_experience"),
     path("experience/<uuid:experience_id>/edit/", edit_experience, name="edit_experience"),
     path("experience/<uuid:experience_id>/delete/",delete_experience,name="delete_experience"),

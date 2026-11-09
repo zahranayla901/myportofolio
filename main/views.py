@@ -151,6 +151,46 @@ def show_experience(request):
     }
     return render(request, "experience.html", context)
 
+
+def get_experience_json(request):
+    """Return the legacy JSON shape used by the original page tests.
+
+    The experience page now loads data from the DRF endpoint, but keeping this
+    read-only endpoint preserves compatibility for existing clients and tests.
+    """
+    query = request.GET.get("q", "").strip()
+    experiences = Experience.objects.prefetch_related("starred_by").order_by(
+        "-started_at", "id"
+    )
+    if query:
+        experiences = experiences.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+
+    data = []
+    for experience in experiences:
+        starred_users = experience.starred_by.all()
+        data.append({
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.category,
+                "category_display": experience.get_category_display(),
+                "thumbnail": experience.thumbnail,
+                "started_at": experience.started_at,
+                "ended_at": experience.ended_at,
+                "is_ongoing": experience.is_ongoing,
+                "star_count": starred_users.count(),
+                "is_starred": (
+                    request.user in starred_users
+                    if request.user.is_authenticated else False
+                ),
+            },
+        })
+
+    return JsonResponse(data, safe=False)
+
 # func to create new experience (C from CRUD)
 # login required to create, Edit, and Delete
 @login_required(login_url="/login/")
